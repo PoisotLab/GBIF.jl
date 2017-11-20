@@ -2,33 +2,68 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Documentation example\n\n\n#\n\n\nGBIF.occurrence\n \n \nMethod\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource", 
+            "text": "Access GBIF data\n\n\nThis package offers access to GBIF data, specifically occurrences, and taxonomic information. There are some built-in data-cleaning routines.", 
             "title": "Home"
         }, 
         {
-            "location": "/#documentation-example", 
-            "text": "#  GBIF.occurrence     Method .  Return an interpreted occurrence given its key  source", 
-            "title": "Documentation example"
+            "location": "/#access-gbif-data", 
+            "text": "This package offers access to GBIF data, specifically occurrences, and taxonomic information. There are some built-in data-cleaning routines.", 
+            "title": "Access GBIF data"
         }, 
         {
             "location": "/occurrences/", 
-            "text": "Retrieving occurrences\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\n#\n\n\nGBIF.occurrences\n \n \nFunction\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
+            "text": "Retrieving occurrences\n\n\n\n\nGetting a single occurrence\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\n\n\nGetting multiple occurrences\n\n\n#\n\n\nGBIF.occurrences\n \n \nFunction\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource\n\n\nNote that the \nOccurrences\n type implements all of the iterator methods (\nstart\n, \nnext\n, \netc\n), so it can be iterated over.\n\n\n\n\nBatch-download of occurences\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
             "title": "Getting data"
         }, 
         {
             "location": "/occurrences/#retrieving-occurrences", 
-            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source  #  GBIF.occurrences     Function .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source  #  GBIF.next!     Function .  Get the next page of results  source  #  GBIF.complete!     Function .  Get all pages of results  source", 
+            "text": "", 
             "title": "Retrieving occurrences"
         }, 
         {
+            "location": "/occurrences/#getting-a-single-occurrence", 
+            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source", 
+            "title": "Getting a single occurrence"
+        }, 
+        {
+            "location": "/occurrences/#getting-multiple-occurrences", 
+            "text": "#  GBIF.occurrences     Function .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source  Note that the  Occurrences  type implements all of the iterator methods ( start ,  next ,  etc ), so it can be iterated over.", 
+            "title": "Getting multiple occurrences"
+        }, 
+        {
+            "location": "/occurrences/#batch-download-of-occurences", 
+            "text": "#  GBIF.next!     Function .  Get the next page of results  source  #  GBIF.complete!     Function .  Get all pages of results  source", 
+            "title": "Batch-download of occurences"
+        }, 
+        {
             "location": "/qaqc/", 
-            "text": "Filtering observations\n\n\n#\n\n\nGBIF.qualitycontrol!\n \n \nFunction\n.\n\n\nCleans a search output\n\n\nUPDATE\n\n\nsource\n\n\n#\n\n\nGBIF.have_both_coordinates\n \n \nFunction\n.\n\n\nBoth latitude and longitude are present\n\n\nsource\n\n\n#\n\n\nGBIF.have_neither_zero_coordinates\n \n \nFunction\n.\n\n\nNeither latitude nor longitude are 0.0\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_zero_coordinates\n \n \nFunction\n.\n\n\nAt most one of latitude and longitude is 0.0\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_issues\n \n \nFunction\n.\n\n\nNo known issues at all\n\n\nsource\n\n\n#\n\n\nGBIF.have_ok_coordinates\n \n \nFunction\n.\n\n\nNo coordinates issues except rounding and WGS84 assumption\n\n\nsource", 
+            "text": "Filtering observations\n\n\nWithin an \nOccurrences\n object, the occurrences themselves are stored in a view. A view is basically an array that can be masked, so it is possible to retain all of the raw data, while only presenting the data that pass filtering.\n\n\n\n\nApply filtering to the data\n\n\n#\n\n\nGBIF.qualitycontrol!\n \n \nFunction\n.\n\n\nCleans a search output\n\n\nUPDATE\n\n\nsource\n\n\n\n\nList of filters\n\n\n#\n\n\nGBIF.have_both_coordinates\n \n \nFunction\n.\n\n\nBoth latitude and longitude are present\n\n\nThis filter will only retain occurrences that have \nboth\n a latitude and a longitude field.\n\n\nsource\n\n\n#\n\n\nGBIF.have_neither_zero_coordinates\n \n \nFunction\n.\n\n\nNeither latitude nor longitude are 0.0\n\n\nThis filter will only retain occurrences that are \nnot\n at the (0,0) coordinate.\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_zero_coordinates\n \n \nFunction\n.\n\n\nAt most one of latitude and longitude is 0.0\n\n\nThis filter will only retain occurrences that have \nat most\n one coordinate being exactly 0.0.\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_issues\n \n \nFunction\n.\n\n\nNo known issues at all\n\n\nThis filter will retain no observation. At least not in theory, but it is very rare to have GBIF records with absolutely no issues. Its use is discouraged.\n\n\nBy design, it is the default argument for \nqualitycontrol!\n \u2013 it's your job to decide precisely which filters you need to use.\n\n\nsource\n\n\n#\n\n\nGBIF.have_ok_coordinates\n \n \nFunction\n.\n\n\nNo coordinates issues except rounding and WGS84 assumption\n\n\nThis filter will retain observations that have no issues, with the exception of assuming WGS84 projection (which a large number of GBIF records do), and rounded coordinates (same thing). It is a reasonable filter for most use cases.\n\n\nsource\n\n\n\n\nMaking your own filters\n\n\nFilter functions are all sharing the same declaration: they accept a single \nOccurrence\n object as input, and return a boolean as output. Think of the filter as a question you ask about the occurrence object. Does it have no know issues? If this is \ntrue\n, then we keep this record. If not, we reject it.\n\n\n\n\nRemoving filters\n\n\n#\n\n\nGBIF.showall!\n \n \nFunction\n.\n\n\nShow all occurrences\n\n\nThis function reverses the action of \nqualitycontrol!\n. It will unmask all records that have been removed under the current filters.\n\n\nsource", 
             "title": "Filtering records"
         }, 
         {
             "location": "/qaqc/#filtering-observations", 
-            "text": "#  GBIF.qualitycontrol!     Function .  Cleans a search output  UPDATE  source  #  GBIF.have_both_coordinates     Function .  Both latitude and longitude are present  source  #  GBIF.have_neither_zero_coordinates     Function .  Neither latitude nor longitude are 0.0  source  #  GBIF.have_no_zero_coordinates     Function .  At most one of latitude and longitude is 0.0  source  #  GBIF.have_no_issues     Function .  No known issues at all  source  #  GBIF.have_ok_coordinates     Function .  No coordinates issues except rounding and WGS84 assumption  source", 
+            "text": "Within an  Occurrences  object, the occurrences themselves are stored in a view. A view is basically an array that can be masked, so it is possible to retain all of the raw data, while only presenting the data that pass filtering.", 
             "title": "Filtering observations"
+        }, 
+        {
+            "location": "/qaqc/#apply-filtering-to-the-data", 
+            "text": "#  GBIF.qualitycontrol!     Function .  Cleans a search output  UPDATE  source", 
+            "title": "Apply filtering to the data"
+        }, 
+        {
+            "location": "/qaqc/#list-of-filters", 
+            "text": "#  GBIF.have_both_coordinates     Function .  Both latitude and longitude are present  This filter will only retain occurrences that have  both  a latitude and a longitude field.  source  #  GBIF.have_neither_zero_coordinates     Function .  Neither latitude nor longitude are 0.0  This filter will only retain occurrences that are  not  at the (0,0) coordinate.  source  #  GBIF.have_no_zero_coordinates     Function .  At most one of latitude and longitude is 0.0  This filter will only retain occurrences that have  at most  one coordinate being exactly 0.0.  source  #  GBIF.have_no_issues     Function .  No known issues at all  This filter will retain no observation. At least not in theory, but it is very rare to have GBIF records with absolutely no issues. Its use is discouraged.  By design, it is the default argument for  qualitycontrol!  \u2013 it's your job to decide precisely which filters you need to use.  source  #  GBIF.have_ok_coordinates     Function .  No coordinates issues except rounding and WGS84 assumption  This filter will retain observations that have no issues, with the exception of assuming WGS84 projection (which a large number of GBIF records do), and rounded coordinates (same thing). It is a reasonable filter for most use cases.  source", 
+            "title": "List of filters"
+        }, 
+        {
+            "location": "/qaqc/#making-your-own-filters", 
+            "text": "Filter functions are all sharing the same declaration: they accept a single  Occurrence  object as input, and return a boolean as output. Think of the filter as a question you ask about the occurrence object. Does it have no know issues? If this is  true , then we keep this record. If not, we reject it.", 
+            "title": "Making your own filters"
+        }, 
+        {
+            "location": "/qaqc/#removing-filters", 
+            "text": "#  GBIF.showall!     Function .  Show all occurrences  This function reverses the action of  qualitycontrol! . It will unmask all records that have been removed under the current filters.  source", 
+            "title": "Removing filters"
         }
     ]
 }
