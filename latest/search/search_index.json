@@ -1,0 +1,34 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Documentation example\n\n\n#\n\n\nGBIF.occurrence\n \n \nMethod\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#documentation-example", 
+            "text": "#  GBIF.occurrence     Method .  Return an interpreted occurrence given its key  source", 
+            "title": "Documentation example"
+        }, 
+        {
+            "location": "/occurrences/", 
+            "text": "Retrieving occurrences\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\n#\n\n\nGBIF.occurrences\n \n \nFunction\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
+            "title": "Getting data"
+        }, 
+        {
+            "location": "/occurrences/#retrieving-occurrences", 
+            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source  #  GBIF.occurrences     Function .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source  #  GBIF.next!     Function .  Get the next page of results  source  #  GBIF.complete!     Function .  Get all pages of results  source", 
+            "title": "Retrieving occurrences"
+        }, 
+        {
+            "location": "/qaqc/", 
+            "text": "Filtering observations\n\n\n#\n\n\nGBIF.qualitycontrol!\n \n \nFunction\n.\n\n\nCleans a search output\n\n\nUPDATE\n\n\nsource\n\n\n#\n\n\nGBIF.have_both_coordinates\n \n \nFunction\n.\n\n\nBoth latitude and longitude are present\n\n\nsource\n\n\n#\n\n\nGBIF.have_neither_zero_coordinates\n \n \nFunction\n.\n\n\nNeither latitude nor longitude are 0.0\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_zero_coordinates\n \n \nFunction\n.\n\n\nAt most one of latitude and longitude is 0.0\n\n\nsource\n\n\n#\n\n\nGBIF.have_no_issues\n \n \nFunction\n.\n\n\nNo known issues at all\n\n\nsource\n\n\n#\n\n\nGBIF.have_ok_coordinates\n \n \nFunction\n.\n\n\nNo coordinates issues except rounding and WGS84 assumption\n\n\nsource", 
+            "title": "Filtering records"
+        }, 
+        {
+            "location": "/qaqc/#filtering-observations", 
+            "text": "#  GBIF.qualitycontrol!     Function .  Cleans a search output  UPDATE  source  #  GBIF.have_both_coordinates     Function .  Both latitude and longitude are present  source  #  GBIF.have_neither_zero_coordinates     Function .  Neither latitude nor longitude are 0.0  source  #  GBIF.have_no_zero_coordinates     Function .  At most one of latitude and longitude is 0.0  source  #  GBIF.have_no_issues     Function .  No known issues at all  source  #  GBIF.have_ok_coordinates     Function .  No coordinates issues except rounding and WGS84 assumption  source", 
+            "title": "Filtering observations"
+        }
+    ]
+}
