@@ -36,7 +36,7 @@
     
     
       
-        <title>Getting data - GBIF.jl</title>
+        <title>Using queries - GBIF.jl</title>
       
     
     
@@ -100,7 +100,7 @@
                 GBIF.jl
               </span>
               <span class="md-header-nav__topic">
-                Getting data
+                Using queries
               </span>
             
           
@@ -222,6 +222,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../occurrences/" title="Getting data" class="md-nav__link">
+      Getting data
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -232,63 +244,10 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Getting data
-      </label>
-    
-    <a href="./" title="Getting data" class="md-nav__link md-nav__link--active">
-      Getting data
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#getting-a-single-occurrence" title="Getting a single occurrence" class="md-nav__link">
-    Getting a single occurrence
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-multiple-occurrences" title="Getting multiple occurrences" class="md-nav__link">
-    Getting multiple occurrences
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#batch-download-of-occurrences" title="Batch-download of occurrences" class="md-nav__link">
-    Batch-download of occurrences
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../queries/" title="Using queries" class="md-nav__link">
+    <a href="./" title="Using queries" class="md-nav__link md-nav__link--active">
       Using queries
     </a>
+    
   </li>
 
     
@@ -321,34 +280,6 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#getting-a-single-occurrence" title="Getting a single occurrence" class="md-nav__link">
-    Getting a single occurrence
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-multiple-occurrences" title="Getting multiple occurrences" class="md-nav__link">
-    Getting multiple occurrences
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#batch-download-of-occurrences" title="Batch-download of occurrences" class="md-nav__link">
-    Batch-download of occurrences
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -359,50 +290,16 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/EcoJulia/GBIF.jl/edit/master/docs/occurrences.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/EcoJulia/GBIF.jl/edit/master/docs/queries.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <p><a id='Retrieving-occurrences-1'></a></p>
-<h1 id="retrieving-occurrences">Retrieving occurrences</h1>
-<p>The most common task is to retrieve a number of occurrences. The core type of this package is <code>Occurrence</code>, which stores a number of data and metadata associated with observations.</p>
-<p><a id='Getting-a-single-occurrence-1'></a></p>
-<h2 id="getting-a-single-occurrence">Getting a single occurrence</h2>
-<p><a id='GBIF.occurrence' href='#GBIF.occurrence'>#</a>
-<strong><code>GBIF.occurrence</code></strong> &mdash; <em>Function</em>.</p>
-<p><strong>Return an interpreted occurrence given its key</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/occurrence.jl#L1-L3' class='documenter-source'>source</a><br></p>
-<p>This can be used to retrieve <a href="https://www.gbif.org/occurrence/1425976049">occurrence <code>1425976049</code></a>, with</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GBIF</span>
-<span class="n">occurrence</span><span class="p">(</span><span class="mi">1425976049</span><span class="p">)</span>
-</pre></div>
-
-
-<p><a id='Getting-multiple-occurrences-1'></a></p>
-<h2 id="getting-multiple-occurrences">Getting multiple occurrences</h2>
-<p><a id='GBIF.occurrences-Tuple{}' href='#GBIF.occurrences-Tuple{}'>#</a>
+                <p><a id='Query-parameters-1'></a></p>
+<h1 id="query-parameters">Query parameters</h1>
+<p><a id='GBIF.occurrences-Tuple{Dict}' href='#GBIF.occurrences-Tuple{Dict}'>#</a>
 <strong><code>GBIF.occurrences</code></strong> &mdash; <em>Method</em>.</p>
 <p><strong>Search for occurrences</strong></p>
-<p>This function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/occurrence.jl#L10-L16' class='documenter-source'>source</a><br></p>
-<p>When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the "Using queries" section of this manual.</p>
-<p>Note that the <code>Occurrences</code> type, returned by <code>occurrences</code>, implements all the necessary methods to iterate over. For example, this allows writing the following:</p>
-<div class="codehilite"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">occurrences</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">single_occ</span> <span class="kp">in</span> <span class="n">o</span>
-  <span class="n">println</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">taxonKey</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-
-
-<p><a id='Batch-download-of-occurrences-1'></a></p>
-<h2 id="batch-download-of-occurrences">Batch-download of occurrences</h2>
-<p><a id='GBIF.next!' href='#GBIF.next!'>#</a>
-<strong><code>GBIF.next!</code></strong> &mdash; <em>Function</em>.</p>
-<p><strong>Get the next page of results</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/paging.jl#L1-L3' class='documenter-source'>source</a><br></p>
-<p><a id='GBIF.complete!' href='#GBIF.complete!'>#</a>
-<strong><code>GBIF.complete!</code></strong> &mdash; <em>Function</em>.</p>
-<p><strong>Get all pages of results</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/paging.jl#L25-L27' class='documenter-source'>source</a><br></p>
+<p>Returns occurrences that correspond to a filter, given in <code>q</code> as a dictionary.</p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/occurrence.jl#L37-L41' class='documenter-source'>source</a><br></p>
                 
                   
                 
@@ -421,7 +318,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../occurrences/" title="Getting data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -430,19 +327,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Getting data
               </span>
             </div>
           </a>
         
         
-          <a href="../queries/" title="Using queries" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../qaqc/" title="Filtering records" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Using queries
+                Filtering records
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

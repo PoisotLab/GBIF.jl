@@ -2,38 +2,58 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Access GBIF data\n\n\nThis package offers access to GBIF data, specifically occurrences, and taxonomic information. There are some built-in data-cleaning routines.", 
+            "text": "Access GBIF data with Julia\n\n\nThis package offers access to biodiversity data through the Global Biodiversity Information Facility (\nGBIF\n) API. The package currently supports access to occurrence information, and limited support for taxonomic information. There are a limited number of cleaning routines built-in, but more can easily be added.\n\n\n\n\nHow to install\n\n\nThe package can be installed from the Julia console:\n\n\nPkg\n.\nadd\n(\nGBIF\n)\n\n\n\n\n\n\n\n\nHow to use\n\n\nAfter installing it, load the package as usual:\n\n\nusing\n \nGBIF\n\n\n\n\n\n\nThis documentation will walk you through the various features.", 
             "title": "Home"
         }, 
         {
-            "location": "/#access-gbif-data", 
-            "text": "This package offers access to GBIF data, specifically occurrences, and taxonomic information. There are some built-in data-cleaning routines.", 
-            "title": "Access GBIF data"
+            "location": "/#access-gbif-data-with-julia", 
+            "text": "This package offers access to biodiversity data through the Global Biodiversity Information Facility ( GBIF ) API. The package currently supports access to occurrence information, and limited support for taxonomic information. There are a limited number of cleaning routines built-in, but more can easily be added.", 
+            "title": "Access GBIF data with Julia"
+        }, 
+        {
+            "location": "/#how-to-install", 
+            "text": "The package can be installed from the Julia console:  Pkg . add ( GBIF )", 
+            "title": "How to install"
+        }, 
+        {
+            "location": "/#how-to-use", 
+            "text": "After installing it, load the package as usual:  using   GBIF   This documentation will walk you through the various features.", 
+            "title": "How to use"
         }, 
         {
             "location": "/occurrences/", 
-            "text": "Retrieving occurrences\n\n\n\n\nGetting a single occurrence\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\n\n\nGetting multiple occurrences\n\n\n#\n\n\nGBIF.occurrences\n \n \nFunction\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource\n\n\nNote that the \nOccurrences\n type implements all of the iterator methods (\nstart\n, \nnext\n, \netc\n), so it can be iterated over.\n\n\n\n\nBatch-download of occurences\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
+            "text": "Retrieving occurrences\n\n\nThe most common task is to retrieve a number of occurrences. The core type of this package is \nOccurrence\n, which stores a number of data and metadata associated with observations.\n\n\n\n\nGetting a single occurrence\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\nThis can be used to retrieve \noccurrence \n1425976049\n, with\n\n\nusing\n \nGBIF\n\n\noccurrence\n(\n1425976049\n)\n\n\n\n\n\n\n\n\nGetting multiple occurrences\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nWhen called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.\n\n\nNote that the \nOccurrences\n type, returned by \noccurrences\n, implements all the necessary methods to iterate over. For example, this allows writing the following:\n\n\no\n \n=\n \noccurrences\n()\n\n\nfor\n \nsingle_occ\n \nin\n \no\n\n  \nprintln\n(\no\n.\ntaxonKey\n)\n\n\nend\n\n\n\n\n\n\n\n\nBatch-download of occurrences\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
             "title": "Getting data"
         }, 
         {
             "location": "/occurrences/#retrieving-occurrences", 
-            "text": "", 
+            "text": "The most common task is to retrieve a number of occurrences. The core type of this package is  Occurrence , which stores a number of data and metadata associated with observations.", 
             "title": "Retrieving occurrences"
         }, 
         {
             "location": "/occurrences/#getting-a-single-occurrence", 
-            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source", 
+            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source  This can be used to retrieve  occurrence  1425976049 , with  using   GBIF  occurrence ( 1425976049 )", 
             "title": "Getting a single occurrence"
         }, 
         {
             "location": "/occurrences/#getting-multiple-occurrences", 
-            "text": "#  GBIF.occurrences     Function .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source  Note that the  Occurrences  type implements all of the iterator methods ( start ,  next ,  etc ), so it can be iterated over.", 
+            "text": "#  GBIF.occurrences     Method .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.  Note that the  Occurrences  type, returned by  occurrences , implements all the necessary methods to iterate over. For example, this allows writing the following:  o   =   occurrences ()  for   single_occ   in   o \n   println ( o . taxonKey )  end", 
             "title": "Getting multiple occurrences"
         }, 
         {
-            "location": "/occurrences/#batch-download-of-occurences", 
+            "location": "/occurrences/#batch-download-of-occurrences", 
             "text": "#  GBIF.next!     Function .  Get the next page of results  source  #  GBIF.complete!     Function .  Get all pages of results  source", 
-            "title": "Batch-download of occurences"
+            "title": "Batch-download of occurrences"
+        }, 
+        {
+            "location": "/queries/", 
+            "text": "Query parameters\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource", 
+            "title": "Using queries"
+        }, 
+        {
+            "location": "/queries/#query-parameters", 
+            "text": "#  GBIF.occurrences     Method .  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source", 
+            "title": "Query parameters"
         }, 
         {
             "location": "/qaqc/", 

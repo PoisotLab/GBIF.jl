@@ -234,6 +234,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../queries/" title="Using queries" class="md-nav__link">
+      Using queries
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -373,35 +385,35 @@
 <strong><code>GBIF.qualitycontrol!</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Cleans a search output</strong></p>
 <p>UPDATE</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L60-L64' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L60-L64' class='documenter-source'>source</a><br></p>
 <p><a id='List-of-filters-1'></a></p>
 <h2 id="list-of-filters">List of filters</h2>
 <p><a id='GBIF.have_both_coordinates' href='#GBIF.have_both_coordinates'>#</a>
 <strong><code>GBIF.have_both_coordinates</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Both latitude and longitude are present</strong></p>
 <p>This filter will only retain occurrences that have <em>both</em> a latitude and a longitude field.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L1-L6' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L1-L6' class='documenter-source'>source</a><br></p>
 <p><a id='GBIF.have_neither_zero_coordinates' href='#GBIF.have_neither_zero_coordinates'>#</a>
 <strong><code>GBIF.have_neither_zero_coordinates</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Neither latitude nor longitude are 0.0</strong></p>
 <p>This filter will only retain occurrences that are <em>not</em> at the (0,0) coordinate.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L11-L15' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L11-L15' class='documenter-source'>source</a><br></p>
 <p><a id='GBIF.have_no_zero_coordinates' href='#GBIF.have_no_zero_coordinates'>#</a>
 <strong><code>GBIF.have_no_zero_coordinates</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>At most one of latitude and longitude is 0.0</strong></p>
 <p>This filter will only retain occurrences that have <em>at most</em> one coordinate being exactly 0.0.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L20-L25' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L20-L25' class='documenter-source'>source</a><br></p>
 <p><a id='GBIF.have_no_issues' href='#GBIF.have_no_issues'>#</a>
 <strong><code>GBIF.have_no_issues</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>No known issues at all</strong></p>
 <p>This filter will retain no observation. At least not in theory, but it is very rare to have GBIF records with absolutely no issues. Its use is discouraged.</p>
 <p>By design, it is the default argument for <code>qualitycontrol!</code> – it's your job to decide precisely which filters you need to use.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L30-L38' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L30-L38' class='documenter-source'>source</a><br></p>
 <p><a id='GBIF.have_ok_coordinates' href='#GBIF.have_ok_coordinates'>#</a>
 <strong><code>GBIF.have_ok_coordinates</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>No coordinates issues except rounding and WGS84 assumption</strong></p>
 <p>This filter will retain observations that have no issues, with the exception of assuming WGS84 projection (which a large number of GBIF records do), and rounded coordinates (same thing). It is a reasonable filter for most use cases.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L43-L49' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L43-L49' class='documenter-source'>source</a><br></p>
 <p><a id='Making-your-own-filters-1'></a></p>
 <h2 id="making-your-own-filters">Making your own filters</h2>
 <p>Filter functions are all sharing the same declaration: they accept a single <code>Occurrence</code> object as input, and return a boolean as output. Think of the filter as a question you ask about the occurrence object. Does it have no know issues? If this is <code>true</code>, then we keep this record. If not, we reject it.</p>
@@ -411,7 +423,7 @@
 <strong><code>GBIF.showall!</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Show all occurrences</strong></p>
 <p>This function reverses the action of <code>qualitycontrol!</code>. It will unmask all records that have been removed under the current filters.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/bd16f402c590b7a968db1a9c8aa0f9bfa6142352/src/qaqc.jl#L81-L86' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/qaqc.jl#L81-L86' class='documenter-source'>source</a><br></p>
                 
                   
                 
@@ -430,7 +442,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../occurrences/" title="Getting data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../queries/" title="Using queries" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -439,7 +451,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Getting data
+                Using queries
               </span>
             </div>
           </a>
