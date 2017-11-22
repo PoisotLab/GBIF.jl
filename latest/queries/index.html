@@ -340,11 +340,16 @@
 <strong><code>GBIF.occurrences</code></strong> &mdash; <em>Method</em>.</p>
 <p><strong>Search for occurrences</strong></p>
 <p>Returns occurrences that correspond to a filter, given in <code>q</code> as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with <code>next!</code> or <code>complete!</code>.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/1c92f86500aeaa2686a79a1088f0150a0abb26e8/src/occurrence.jl#L40-L47' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d80beb6f20ae5591320262d795b44b4b831ba277/src/occurrence.jl#L40-L47' class='documenter-source'>source</a><br></p>
 <p><a id='Internal-checks-for-query-parameters-1'></a></p>
 <h2 id="internal-checks-for-query-parameters">Internal checks for query parameters</h2>
-<div class="codehilite"><pre><span></span>check_occurrences_parameters!(q::Dict)
-</pre></div>
+<p><a id='GBIF.check_occurrences_parameters!-Tuple{Dict}' href='#GBIF.check_occurrences_parameters!-Tuple{Dict}'>#</a>
+<strong><code>GBIF.check_occurrences_parameters!</code></strong> &mdash; <em>Method</em>.</p>
+<p><strong>Checks that the queries for occurrences searches are well formatted</strong></p>
+<p>This is used internally.</p>
+<p>Everything this function does is derived from the GBIF API documentation, including (and especially) the values for enum types. This modifies the queryset. Filters that are not allowed are removed, and filters that have incorrect values are dropped too.</p>
+<p>This feels like the most conservative option – the user can always filter the results when they are returned.</p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d80beb6f20ae5591320262d795b44b4b831ba277/src/query.jl#L1-L13' class='documenter-source'>source</a><br></p>
                 
                   
                 
