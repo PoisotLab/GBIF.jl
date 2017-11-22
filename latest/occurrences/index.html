@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.1.0">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.1.1">
     
     
       
@@ -40,13 +40,13 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-3368aa6b74.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1411ec6b.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-95ad5566f9.palette.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.d142ea54.css">
       
     
     
-      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
+      <script src="../assets/javascripts/modernizr.f383bccf.js"></script>
     
     
       
@@ -271,6 +271,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exporting-results" title="Exporting results" class="md-nav__link">
+    Exporting results
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -345,6 +352,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exporting-results" title="Exporting results" class="md-nav__link">
+    Exporting results
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -370,7 +384,8 @@
 <p><a id='GBIF.occurrence' href='#GBIF.occurrence'>#</a>
 <strong><code>GBIF.occurrence</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Return an interpreted occurrence given its key</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/occurrence.jl#L1-L3' class='documenter-source'>source</a><br></p>
+<p>The key can be given as a string or as an integer.</p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/1c92f86500aeaa2686a79a1088f0150a0abb26e8/src/occurrence.jl#L1-L6' class='documenter-source'>source</a><br></p>
 <p>This can be used to retrieve <a href="https://www.gbif.org/occurrence/1425976049">occurrence <code>1425976049</code></a>, with</p>
 <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">GBIF</span>
 <span class="n">occurrence</span><span class="p">(</span><span class="mi">1425976049</span><span class="p">)</span>
@@ -382,8 +397,8 @@
 <p><a id='GBIF.occurrences-Tuple{}' href='#GBIF.occurrences-Tuple{}'>#</a>
 <strong><code>GBIF.occurrences</code></strong> &mdash; <em>Method</em>.</p>
 <p><strong>Search for occurrences</strong></p>
-<p>This function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.</p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/occurrence.jl#L10-L16' class='documenter-source'>source</a><br></p>
+<p>This function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.</p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/1c92f86500aeaa2686a79a1088f0150a0abb26e8/src/occurrence.jl#L13-L19' class='documenter-source'>source</a><br></p>
 <p>When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the "Using queries" section of this manual.</p>
 <p>Note that the <code>Occurrences</code> type, returned by <code>occurrences</code>, implements all the necessary methods to iterate over. For example, this allows writing the following:</p>
 <div class="codehilite"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">occurrences</span><span class="p">()</span>
@@ -398,11 +413,19 @@
 <p><a id='GBIF.next!' href='#GBIF.next!'>#</a>
 <strong><code>GBIF.next!</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Get the next page of results</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/paging.jl#L1-L3' class='documenter-source'>source</a><br></p>
+<p>This function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the <code>.query["limit"]</code> value, to any value <em>below</em> 200.</p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/1c92f86500aeaa2686a79a1088f0150a0abb26e8/src/paging.jl#L1-L7' class='documenter-source'>source</a><br></p>
 <p><a id='GBIF.complete!' href='#GBIF.complete!'>#</a>
 <strong><code>GBIF.complete!</code></strong> &mdash; <em>Function</em>.</p>
 <p><strong>Get all pages of results</strong></p>
-<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/d7e3ad8d470e1703d357f4d683587f4ef804e135/src/paging.jl#L25-L27' class='documenter-source'>source</a><br></p>
+<p>This function will retrieve <em>all</em> matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.</p>
+<p>Internally, this function is simply calling <code>next!</code> until all records are exhausted. </p>
+<p><a target='_blank' href='https://github.com/EcoJulia/GBIF.jl/blob/1c92f86500aeaa2686a79a1088f0150a0abb26e8/src/paging.jl#L29-L39' class='documenter-source'>source</a><br></p>
+<p><a id='Exporting-results-1'></a></p>
+<h2 id="exporting-results">Exporting results</h2>
+<p>The <code>Occurrences</code> type can be converted into a <code>DataFrame</code> for easy export and filtering.</p>
+<div class="codehilite"><pre><span></span>DataFrame(o::Occurrences)
+</pre></div>
                 
                   
                 
@@ -472,7 +495,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application-a5397a53ce.js"></script>
+      <script src="../assets/javascripts/application.9a4a50d4.js"></script>
       
       <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
       

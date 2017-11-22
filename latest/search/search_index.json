@@ -22,7 +22,7 @@
         }, 
         {
             "location": "/occurrences/", 
-            "text": "Retrieving occurrences\n\n\nThe most common task is to retrieve a number of occurrences. The core type of this package is \nOccurrence\n, which stores a number of data and metadata associated with observations.\n\n\n\n\nGetting a single occurrence\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nsource\n\n\nThis can be used to retrieve \noccurrence \n1425976049\n, with\n\n\nusing\n \nGBIF\n\n\noccurrence\n(\n1425976049\n)\n\n\n\n\n\n\n\n\nGetting multiple occurrences\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.\n\n\nsource\n\n\nWhen called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.\n\n\nNote that the \nOccurrences\n type, returned by \noccurrences\n, implements all the necessary methods to iterate over. For example, this allows writing the following:\n\n\no\n \n=\n \noccurrences\n()\n\n\nfor\n \nsingle_occ\n \nin\n \no\n\n  \nprintln\n(\no\n.\ntaxonKey\n)\n\n\nend\n\n\n\n\n\n\n\n\nBatch-download of occurrences\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nsource", 
+            "text": "Retrieving occurrences\n\n\nThe most common task is to retrieve a number of occurrences. The core type of this package is \nOccurrence\n, which stores a number of data and metadata associated with observations.\n\n\n\n\nGetting a single occurrence\n\n\n#\n\n\nGBIF.occurrence\n \n \nFunction\n.\n\n\nReturn an interpreted occurrence given its key\n\n\nThe key can be given as a string or as an integer.\n\n\nsource\n\n\nThis can be used to retrieve \noccurrence \n1425976049\n, with\n\n\nusing\n \nGBIF\n\n\noccurrence\n(\n1425976049\n)\n\n\n\n\n\n\n\n\nGetting multiple occurrences\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nThis function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.\n\n\nsource\n\n\nWhen called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.\n\n\nNote that the \nOccurrences\n type, returned by \noccurrences\n, implements all the necessary methods to iterate over. For example, this allows writing the following:\n\n\no\n \n=\n \noccurrences\n()\n\n\nfor\n \nsingle_occ\n \nin\n \no\n\n  \nprintln\n(\no\n.\ntaxonKey\n)\n\n\nend\n\n\n\n\n\n\n\n\nBatch-download of occurrences\n\n\n#\n\n\nGBIF.next!\n \n \nFunction\n.\n\n\nGet the next page of results\n\n\nThis function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the \n.query[\"limit\"]\n value, to any value \nbelow\n 200.\n\n\nsource\n\n\n#\n\n\nGBIF.complete!\n \n \nFunction\n.\n\n\nGet all pages of results\n\n\nThis function will retrieve \nall\n matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.\n\n\nInternally, this function is simply calling \nnext!\n until all records are exhausted. \n\n\nsource\n\n\n\n\nExporting results\n\n\nThe \nOccurrences\n type can be converted into a \nDataFrame\n for easy export and filtering.\n\n\nDataFrame(o::Occurrences)", 
             "title": "Getting data"
         }, 
         {
@@ -32,28 +32,38 @@
         }, 
         {
             "location": "/occurrences/#getting-a-single-occurrence", 
-            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  source  This can be used to retrieve  occurrence  1425976049 , with  using   GBIF  occurrence ( 1425976049 )", 
+            "text": "#  GBIF.occurrence     Function .  Return an interpreted occurrence given its key  The key can be given as a string or as an integer.  source  This can be used to retrieve  occurrence  1425976049 , with  using   GBIF  occurrence ( 1425976049 )", 
             "title": "Getting a single occurrence"
         }, 
         {
             "location": "/occurrences/#getting-multiple-occurrences", 
-            "text": "#  GBIF.occurrences     Method .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results fast for illustration purposes.  source  When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.  Note that the  Occurrences  type, returned by  occurrences , implements all the necessary methods to iterate over. For example, this allows writing the following:  o   =   occurrences ()  for   single_occ   in   o \n   println ( o . taxonKey )  end", 
+            "text": "#  GBIF.occurrences     Method .  Search for occurrences  This function will return the latest occurrences \u2013 usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.  source  When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.  Note that the  Occurrences  type, returned by  occurrences , implements all the necessary methods to iterate over. For example, this allows writing the following:  o   =   occurrences ()  for   single_occ   in   o \n   println ( o . taxonKey )  end", 
             "title": "Getting multiple occurrences"
         }, 
         {
             "location": "/occurrences/#batch-download-of-occurrences", 
-            "text": "#  GBIF.next!     Function .  Get the next page of results  source  #  GBIF.complete!     Function .  Get all pages of results  source", 
+            "text": "#  GBIF.next!     Function .  Get the next page of results  This function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the  .query[\"limit\"]  value, to any value  below  200.  source  #  GBIF.complete!     Function .  Get all pages of results  This function will retrieve  all  matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.  Internally, this function is simply calling  next!  until all records are exhausted.   source", 
             "title": "Batch-download of occurrences"
         }, 
         {
+            "location": "/occurrences/#exporting-results", 
+            "text": "The  Occurrences  type can be converted into a  DataFrame  for easy export and filtering.  DataFrame(o::Occurrences)", 
+            "title": "Exporting results"
+        }, 
+        {
             "location": "/queries/", 
-            "text": "Query parameters\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary.\n\n\nsource", 
+            "text": "Query parameters\n\n\n#\n\n\nGBIF.occurrences\n \n \nMethod\n.\n\n\nSearch for occurrences\n\n\nReturns occurrences that correspond to a filter, given in \nq\n as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with \nnext!\n or \ncomplete!\n.\n\n\nsource\n\n\n\n\nInternal checks for query parameters\n\n\ncheck_occurrences_parameters!(q::Dict)", 
             "title": "Using queries"
         }, 
         {
             "location": "/queries/#query-parameters", 
-            "text": "#  GBIF.occurrences     Method .  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary.  source", 
+            "text": "#  GBIF.occurrences     Method .  Search for occurrences  Returns occurrences that correspond to a filter, given in  q  as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with  next!  or  complete! .  source", 
             "title": "Query parameters"
+        }, 
+        {
+            "location": "/queries/#internal-checks-for-query-parameters", 
+            "text": "check_occurrences_parameters!(q::Dict)", 
+            "title": "Internal checks for query parameters"
         }, 
         {
             "location": "/qaqc/", 
