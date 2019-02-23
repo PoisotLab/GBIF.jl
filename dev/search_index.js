@@ -301,7 +301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Types",
     "title": "GBIF.GBIFRecords",
     "category": "type",
-    "text": "List of occurrences and metadata\n\nThis type has actually very few informations, besides offset (the number of records already retrieved) and count (the total number of records). The query field stores the query parameters, and show is a vector of boolean values to decide which of the GBIFRecord (stored in occurrences) will be displayed.\n\nThis type is mutable and fully iterable.\n\n\n\n\n\n"
+    "text": "List of occurrences and metadata\n\nThis type has actually very few information, besides offset (the number of records already retrieved) and count (the total number of records). The query field stores the query parameters, and show is a vector of boolean values to decide which of the GBIFRecord (stored in occurrences) will be displayed.\n\nThis type is mutable and fully iterable.\n\n\n\n\n\n"
 },
 
 {
