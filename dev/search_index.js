@@ -97,11 +97,43 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "data/#GBIF.occurrences-Tuple{GBIFTaxon}",
+    "page": "Getting data",
+    "title": "GBIF.occurrences",
+    "category": "method",
+    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+},
+
+{
     "location": "data/#Multiple-occurrences-1",
     "page": "Getting data",
     "title": "Multiple occurrences",
     "category": "section",
-    "text": "occurrences()When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.Note that the GBIFRecords type, returned by occurrences, implements all the necessary methods to iterate over collections. For example, this allows writing the following:o = occurrences()\nfor single_occ in o\n  println(o.taxonKey)\nend"
+    "text": "occurrences()\noccurrences(t::GBIFTaxon)When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Note that the GBIFRecords type, returned by occurrences, implements all the necessary methods to iterate over collections. For example, this allows writing the following:o = occurrences()\nfor single_occ in o\n  println(o.taxonKey)\nend"
+},
+
+{
+    "location": "data/#GBIF.occurrences-Tuple{Dict}",
+    "page": "Getting data",
+    "title": "GBIF.occurrences",
+    "category": "method",
+    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#GBIF.occurrences-Tuple{GBIFTaxon,Dict}",
+    "page": "Getting data",
+    "title": "GBIF.occurrences",
+    "category": "method",
+    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#Query-parameters-1",
+    "page": "Getting data",
+    "title": "Query parameters",
+    "category": "section",
+    "text": "occurrences(q::Dict)\noccurrences(t::GBIFTaxon, q::Dict)"
 },
 
 {
@@ -126,46 +158,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Batch-download of occurrences",
     "category": "section",
     "text": "next!\ncomplete!"
-},
-
-{
-    "location": "queries/#",
-    "page": "Queries",
-    "title": "Queries",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "queries/#GBIF.occurrences-Tuple{Dict}",
-    "page": "Queries",
-    "title": "GBIF.occurrences",
-    "category": "method",
-    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
-},
-
-{
-    "location": "queries/#Query-parameters-1",
-    "page": "Queries",
-    "title": "Query parameters",
-    "category": "section",
-    "text": "occurrences(q::Dict)"
-},
-
-{
-    "location": "queries/#GBIF.check_records_parameters!-Tuple{Dict}",
-    "page": "Queries",
-    "title": "GBIF.check_records_parameters!",
-    "category": "method",
-    "text": "Checks that the queries for occurrences searches are well formatted\n\nThis is used internally.\n\nEverything this function does is derived from the GBIF API documentation, including (and especially) the values for enum types. This modifies the queryset. Filters that are not allowed are removed, and filters that have incorrect values are dropped too.\n\nThis feels like the most conservative option – the user can always filter the results when they are returned.\n\n\n\n\n\n"
-},
-
-{
-    "location": "queries/#Internal-checks-for-query-parameters-1",
-    "page": "Queries",
-    "title": "Internal checks for query parameters",
-    "category": "section",
-    "text": "GBIF.check_records_parameters!(q::Dict)"
 },
 
 {
@@ -301,7 +293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Types",
     "title": "GBIF.GBIFRecord",
     "category": "type",
-    "text": "Represents an occurrence in the GBIF format\n\nThis is currently a subset of all the fields. This struct is not mutable – this ensures that the objects returned from the GBIF database are never modified by the user.\n\n\n\n\n\n"
+    "text": "Represents an occurrence in the GBIF format\n\nThis is currently a subset of all the fields. This struct is not mutable – this ensures that the objects returned from the GBIF database are never modified by the user.\n\nThe taxon field is a GBIFTaxon object, and can therefore be manipulated as any other GBIFTaxon.\n\n\n\n\n\n"
 },
 
 {
