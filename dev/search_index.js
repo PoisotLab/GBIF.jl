@@ -33,131 +33,99 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "occurrences/#",
-    "page": "Occurrences",
-    "title": "Occurrences",
+    "location": "data/#",
+    "page": "Getting data",
+    "title": "Getting data",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "occurrences/#Retrieving-occurrences-1",
-    "page": "Occurrences",
-    "title": "Retrieving occurrences",
-    "category": "section",
-    "text": "The most common task is to retrieve a number of occurrences. The core type of this package is GBIFRecord, which stores a number of data and metadata associated with observations of occurrences."
-},
-
-{
-    "location": "occurrences/#GBIF.occurrence",
-    "page": "Occurrences",
-    "title": "GBIF.occurrence",
-    "category": "function",
-    "text": "Return an interpreted occurrence given its key\n\nThe key can be given as a string or as an integer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "occurrences/#Getting-a-single-occurrence-1",
-    "page": "Occurrences",
-    "title": "Getting a single occurrence",
-    "category": "section",
-    "text": "occurrenceThis can be used to retrieve [occurrence 1425976049][exocc], withusing GBIF\noccurrence(1425976049)[exocc]: https://www.gbif.org/occurrence/1425976049"
-},
-
-{
-    "location": "occurrences/#GBIF.occurrences-Tuple{}",
-    "page": "Occurrences",
-    "title": "GBIF.occurrences",
-    "category": "method",
-    "text": "Search for occurrences\n\nThis function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.\n\n\n\n\n\n"
-},
-
-{
-    "location": "occurrences/#Getting-multiple-occurrences-1",
-    "page": "Occurrences",
-    "title": "Getting multiple occurrences",
-    "category": "section",
-    "text": "occurrences()When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.Note that the GBIFRecords type, returned by occurrences, implements all the necessary methods to iterate over collections. For example, this allows writing the following:o = occurrences()\nfor single_occ in o\n  println(o.taxonKey)\nend"
-},
-
-{
-    "location": "occurrences/#GBIF.next!",
-    "page": "Occurrences",
-    "title": "GBIF.next!",
-    "category": "function",
-    "text": "Get the next page of results\n\nThis function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the .query[\"limit\"] value, to any value below 200.\n\n\n\n\n\n"
-},
-
-{
-    "location": "occurrences/#GBIF.complete!",
-    "page": "Occurrences",
-    "title": "GBIF.complete!",
-    "category": "function",
-    "text": "Get all pages of results\n\nThis function will retrieve all matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.\n\nInternally, this function is simply calling next! until all records are exhausted.\n\n\n\n\n\n"
-},
-
-{
-    "location": "occurrences/#Batch-download-of-occurrences-1",
-    "page": "Occurrences",
-    "title": "Batch-download of occurrences",
-    "category": "section",
-    "text": "next!\ncomplete!"
-},
-
-{
-    "location": "occurrences/#Filtering-occurrences-after-download-1",
-    "page": "Occurrences",
-    "title": "Filtering occurrences after download",
-    "category": "section",
-    "text": "The GBIFRecords objects can be used with the Query.jl package. For example, to get the observations from France in the most recent 20 observations, we can use:using Query\no = occurrences()\n@from i in o begin\n    @where i.country == \"France\"\n    @select {i.key, i.species}\n    @collect\nend"
-},
-
-{
-    "location": "taxa/#",
-    "page": "Taxa",
-    "title": "Taxa",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "taxa/#Retrieving-taxa-1",
-    "page": "Taxa",
-    "title": "Retrieving taxa",
+    "location": "data/#Retrieving-data-1",
+    "page": "Getting data",
+    "title": "Retrieving data",
     "category": "section",
     "text": ""
 },
 
 {
-    "location": "taxa/#GBIF.taxon",
-    "page": "Taxa",
+    "location": "data/#GBIF.taxon",
+    "page": "Getting data",
     "title": "GBIF.taxon",
     "category": "function",
     "text": "Get information about a taxon at any level\n\ntaxon(name::String)\n\nThis function will look for a taxon by its (scientific) name in the GBIF reference taxonomy.\n\nOptional arguments are\n\nrank::Union{Symbol,Nothing}=:SPECIES – the rank of the taxon you want. This is part of a controlled vocabulary, and can only be one of :DOMAIN, :CLASS, :CULTIVAR, :FAMILY, :FORM, :GENUS, :INFORMAL, :ORDER, :PHYLUM,, :SECTION, :SUBCLASS, :VARIETY, :TRIBE, :KINGDOM, :SUBFAMILY, :SUBFORM, :SUBGENUS, :SUBKINGDOM, :SUBORDER, :SUBPHYLUM, :SUBSECTION, :SUBSPECIES, :SUBTRIBE, :SUBVARIETY, :SUPERCLASS, :SUPERFAMILY, :SUPERORDER, and :SPECIES\nstrict::Bool=true – whether the match should be strict, or fuzzy\nverbose::Bool=false – whether the query should print out information about the reply (not usually useful)\n\nFinally, one can also specify other levels of the taxonomy, using  kingdom, phylum, class, order, family, and genus, all of which can either be String or Nothing.\n\n\n\n\n\n"
 },
 
 {
-    "location": "taxa/#Looking-for-taxa-1",
-    "page": "Taxa",
-    "title": "Looking for taxa",
+    "location": "data/#Getting-taxonomic-information-1",
+    "page": "Getting data",
+    "title": "Getting taxonomic information",
     "category": "section",
     "text": "taxon"
 },
 
 {
-    "location": "taxa/#GBIF.GBIFTaxon",
-    "page": "Taxa",
-    "title": "GBIF.GBIFTaxon",
-    "category": "type",
-    "text": "Representation of a GBIF taxon\n\nAll taxonomic level fields can either be missing, or a pair linking the name of the taxon/level to its unique key in the GBIF database.\n\nname - the vernacular name of the taxon\n\nscientific - the accepted scientific name of the species\n\nstatus - the status of the taxon\n\nmatch - the type of match\n\nkingdom - a Pair linking the name of the kingdom to its unique ID\n\nphylum - a Pair linking the name of the phylum to its unique ID\n\nclass - a Pair linking the name of the class to its unique ID\n\norder - a Pair linking the name of the order to its unique ID\n\nfamily - a Pair linking the name of the family to its unique ID\n\ngenus - a Pair linking the name of the genus to its unique ID\n\nspecies - a Pair linking the name of the species to its unique ID\n\nconfidence - an Int64 to note the confidence in the match\n\nsynonym - a Boolean indicating whether the taxon is a synonym\n\n\n\n\n\n"
+    "location": "data/#Getting-occurrence-data-1",
+    "page": "Getting data",
+    "title": "Getting occurrence data",
+    "category": "section",
+    "text": "The most common task is to retrieve a number of occurrences. The core type of this package is GBIFRecord, which stores a number of data and metadata associated with observations of occurrences."
 },
 
 {
-    "location": "taxa/#Type-documentation-1",
-    "page": "Taxa",
-    "title": "Type documentation",
+    "location": "data/#GBIF.occurrence",
+    "page": "Getting data",
+    "title": "GBIF.occurrence",
+    "category": "function",
+    "text": "Return an interpreted occurrence given its key\n\nThe key can be given as a string or as an integer.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#Single-occurrence-1",
+    "page": "Getting data",
+    "title": "Single occurrence",
     "category": "section",
-    "text": "GBIFTaxon"
+    "text": "occurrenceThis can be used to retrieve occurrence 1425976049, withusing GBIF\noccurrence(1425976049)"
+},
+
+{
+    "location": "data/#GBIF.occurrences-Tuple{}",
+    "page": "Getting data",
+    "title": "GBIF.occurrences",
+    "category": "method",
+    "text": "Search for occurrences\n\nThis function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#Multiple-occurrences-1",
+    "page": "Getting data",
+    "title": "Multiple occurrences",
+    "category": "section",
+    "text": "occurrences()When called with no arguments, this function will return a list of the latest 20 occurrences recorded in GBIF. Additional arguments can be specified to filter some occurrences. They are detailed in the \"Using queries\" section of this manual.Note that the GBIFRecords type, returned by occurrences, implements all the necessary methods to iterate over collections. For example, this allows writing the following:o = occurrences()\nfor single_occ in o\n  println(o.taxonKey)\nend"
+},
+
+{
+    "location": "data/#GBIF.next!",
+    "page": "Getting data",
+    "title": "GBIF.next!",
+    "category": "function",
+    "text": "Get the next page of results\n\nThis function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the .query[\"limit\"] value, to any value below 200.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#GBIF.complete!",
+    "page": "Getting data",
+    "title": "GBIF.complete!",
+    "category": "function",
+    "text": "Get all pages of results\n\nThis function will retrieve all matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.\n\nInternally, this function is simply calling next! until all records are exhausted.\n\n\n\n\n\n"
+},
+
+{
+    "location": "data/#Batch-download-of-occurrences-1",
+    "page": "Getting data",
+    "title": "Batch-download of occurrences",
+    "category": "section",
+    "text": "next!\ncomplete!"
 },
 
 {
@@ -302,6 +270,54 @@ var documenterSearchIndex = {"docs": [
     "title": "Removing filters",
     "category": "section",
     "text": "showall!"
+},
+
+{
+    "location": "qaqc/#Filtering-occurrences-after-download-1",
+    "page": "Filtering records",
+    "title": "Filtering occurrences after download",
+    "category": "section",
+    "text": "The GBIFRecords objects can be used with the Query.jl package. For example, to get the observations from France in the most recent 20 observations, we can use:using Query\no = occurrences()\n@from i in o begin\n    @where i.country == \"France\"\n    @select {i.key, i.species}\n    @collect\nend"
+},
+
+{
+    "location": "types/#",
+    "page": "Types",
+    "title": "Types",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "types/#GBIF.GBIFTaxon",
+    "page": "Types",
+    "title": "GBIF.GBIFTaxon",
+    "category": "type",
+    "text": "Representation of a GBIF taxon\n\nAll taxonomic level fields can either be missing, or a pair linking the name of the taxon/level to its unique key in the GBIF database.\n\nname - the vernacular name of the taxon\n\nscientific - the accepted scientific name of the species\n\nstatus - the status of the taxon\n\nmatch - the type of match\n\nkingdom - a Pair linking the name of the kingdom to its unique ID\n\nphylum - a Pair linking the name of the phylum to its unique ID\n\nclass - a Pair linking the name of the class to its unique ID\n\norder - a Pair linking the name of the order to its unique ID\n\nfamily - a Pair linking the name of the family to its unique ID\n\ngenus - a Pair linking the name of the genus to its unique ID\n\nspecies - a Pair linking the name of the species to its unique ID\n\nconfidence - an Int64 to note the confidence in the match\n\nsynonym - a Boolean indicating whether the taxon is a synonym\n\n\n\n\n\n"
+},
+
+{
+    "location": "types/#GBIF.GBIFRecord",
+    "page": "Types",
+    "title": "GBIF.GBIFRecord",
+    "category": "type",
+    "text": "Represents an occurrence in the GBIF format\n\nThis is currently a subset of all the fields. This struct is not mutable – this ensures that the objects returned from the GBIF database are never modified by the user.\n\n\n\n\n\n"
+},
+
+{
+    "location": "types/#GBIF.GBIFRecords",
+    "page": "Types",
+    "title": "GBIF.GBIFRecords",
+    "category": "type",
+    "text": "**List of occurrences and metadata***\n\n\n\n\n\n"
+},
+
+{
+    "location": "types/#Data-representation-1",
+    "page": "Types",
+    "title": "Data representation",
+    "category": "section",
+    "text": "GBIFTaxon\nGBIFRecord\nGBIFRecords"
 },
 
 ]}
