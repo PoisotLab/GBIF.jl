@@ -121,6 +121,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "taxa/#Retrieving-taxa-1",
+    "page": "Taxa",
+    "title": "Retrieving taxa",
+    "category": "section",
+    "text": ""
+},
+
+{
     "location": "taxa/#GBIF.taxon",
     "page": "Taxa",
     "title": "GBIF.taxon",
@@ -129,11 +137,27 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "taxa/#Retrieving-taxa-1",
+    "location": "taxa/#Looking-for-taxa-1",
     "page": "Taxa",
-    "title": "Retrieving taxa",
+    "title": "Looking for taxa",
     "category": "section",
     "text": "taxon"
+},
+
+{
+    "location": "taxa/#GBIF.GBIFTaxon",
+    "page": "Taxa",
+    "title": "GBIF.GBIFTaxon",
+    "category": "type",
+    "text": "Representation of a GBIF taxon\n\nAll taxonomic level fields can either be missing, or a pair linking the name of the taxon/level to its unique key in the GBIF database.\n\nname - the vernacular name of the taxon\n\nscientific - the accepted scientific name of the species\n\nstatus - the status of the taxon\n\nmatch - the type of match\n\nkingdom - a Pair linking the name of the kingdom to its unique ID\n\nphylum - a Pair linking the name of the phylum to its unique ID\n\nclass - a Pair linking the name of the class to its unique ID\n\norder - a Pair linking the name of the order to its unique ID\n\nfamily - a Pair linking the name of the family to its unique ID\n\ngenus - a Pair linking the name of the genus to its unique ID\n\nspecies - a Pair linking the name of the species to its unique ID\n\nconfidence - an Int64 to note the confidence in the match\n\nsynonym - a Boolean indicating whether the taxon is a synonym\n\n\n\n\n\n"
+},
+
+{
+    "location": "taxa/#Type-documentation-1",
+    "page": "Taxa",
+    "title": "Type documentation",
+    "category": "section",
+    "text": "GBIFTaxon"
 },
 
 {
