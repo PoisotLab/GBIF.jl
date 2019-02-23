@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.occurrence",
     "category": "function",
-    "text": "Return an interpreted occurrence given its key\n\nThe key can be given as a string or as an integer.\n\n\n\n\n\n"
+    "text": "Return an interpreted occurrence given its key\n\noccurrence(key::Union{String, Integer})\n\nThe key can be given as a string or as an integer.\n\n\n\n\n\n"
 },
 
 {
@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.occurrences",
     "category": "method",
-    "text": "Search for occurrences\n\nThis function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.\n\n\n\n\n\n"
+    "text": "Retrieve latest occurrences\n\noccurrences()\n\nThis function will return the latest occurrences – usually 20, but this is entirely determined by the server default page size. This is mostly useful to get a few results rapidly for illustration purposes.\n\n\n\n\n\n"
 },
 
 {
@@ -101,7 +101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.occurrences",
     "category": "method",
-    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+    "text": "Retrieve latest occurrences for a taxon\n\noccurrences(t::GBIFTaxon)\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
 },
 
 {
@@ -117,7 +117,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.occurrences",
     "category": "method",
-    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+    "text": "Retrieve latest occurrences based on a query\n\noccurrences(q::Dict)\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
 },
 
 {
@@ -125,7 +125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.occurrences",
     "category": "method",
-    "text": "Search for occurrences\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
+    "text": "Retrieve latest occurrences for a taxon based on a query\n\noccurrences(t::GBIFTaxon, q::Dict)\n\nReturns occurrences that correspond to a filter, given in q as a dictionary. When first called, this function will return the latest 20 hits (or whichever default page size GBIF uses). Future occurrences can be queried with next! or complete!.\n\n\n\n\n\n"
 },
 
 {
