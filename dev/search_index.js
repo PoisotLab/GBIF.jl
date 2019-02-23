@@ -13,7 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Access GBIF data with Julia",
     "category": "section",
-    "text": "This package offers access to biodiversity data through the Global Biodiversity Information Facility ([GBIF]) API. The package currently supports access to occurrence information, and limited support for taxonomic information. There are a limited number of cleaning routines built-in, but more can easily be added."
+    "text": "This package offers access to biodiversity data through the Global Biodiversity Information Facility (GBIF) API. The package currently supports access to occurrence information, and limited support for taxonomic information. There are a limited number of cleaning routines built-in, but more can easily be added."
 },
 
 {
@@ -29,7 +29,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "How to use",
     "category": "section",
-    "text": "After installing it, load the package as usual:using GBIFThis documentation will walk you through the various features.[GBIF]: https://www.gbif.org/"
+    "text": "After installing it, load the package as usual:using GBIFThis documentation will walk you through the various features."
 },
 
 {
