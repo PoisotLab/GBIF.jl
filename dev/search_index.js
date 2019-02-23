@@ -113,6 +113,30 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "taxa/#",
+    "page": "Taxa",
+    "title": "Taxa",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "taxa/#GBIF.taxon",
+    "page": "Taxa",
+    "title": "GBIF.taxon",
+    "category": "function",
+    "text": "Get information about a taxon at any level\n\n\n\n\n\n"
+},
+
+{
+    "location": "taxa/#Retrieving-taxa-1",
+    "page": "Taxa",
+    "title": "Retrieving taxa",
+    "category": "section",
+    "text": "taxon"
+},
+
+{
     "location": "queries/#",
     "page": "Queries",
     "title": "Queries",
@@ -173,7 +197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filtering records",
     "title": "GBIF.qualitycontrol!",
     "category": "function",
-    "text": "Cleans a search output\n\nThis function loops through all records, and applies the filters to it. Filters are built-in or user-defined functions that return true when the record needs to be kept, and false when it needs to be discarded.\n\nIt is important to note that the records are not actually removed: they are masked from user view. This means that you can try different filtering strategies without having to re-query GBIF.\n\n\n\n\n\n"
+    "text": "Cleans a search output\n\nThis function loops through all records, and applies the filters to it. Filters are built-in or user-defined functions that return true when the record needs to be kept, and false when it needs to be discarded.\n\nIt is important to note that the records are not actually removed: they are masked from user view. This means that you can try different filtering strategies without having to re-query GBIF.\n\nThe optional filters argument is an array of functions, each of the functions must take a single GBIFRecord as an input, and return true or false.\n\n\n\n\n\n"
 },
 
 {
