@@ -141,7 +141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.next!",
     "category": "function",
-    "text": "Get the next page of results\n\nThis function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the .query[\"limit\"] value, to any value below 200.\n\n\n\n\n\n"
+    "text": "Get the next page of results\n\nThis function will retrieve the next page of results. By default, it will walk through queries 20 at a time. This can be modified by changing the .query[\"limit\"] value, to any value below 200.\n\nIf filters have been applied to this query before, they will be removed to ensure that the previous and the new occurrences have the same status.\n\n\n\n\n\n"
 },
 
 {
@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting data",
     "title": "GBIF.complete!",
     "category": "function",
-    "text": "Get all pages of results\n\nThis function will retrieve all matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.\n\nInternally, this function is simply calling next! until all records are exhausted.\n\n\n\n\n\n"
+    "text": "Get all pages of results\n\nThis function will retrieve all matches (up to the GBIF limit of 200000 records for a streaming query). It is recommended to set the limit to more than the default of 20 before calling this function. If not, this will trigger a lot of requests both from your end and on the GBIF infrastructure.\n\nInternally, this function is simply calling next! until all records are exhausted. This implies that the effect of filters that were previously applied to the records will be removed.\n\n\n\n\n\n"
 },
 
 {
@@ -177,19 +177,35 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "qaqc/#GBIF.qualitycontrol!",
+    "location": "qaqc/#Base.filter!",
     "page": "Filtering records",
-    "title": "GBIF.qualitycontrol!",
+    "title": "Base.filter!",
     "category": "function",
-    "text": "Cleans a search output\n\nThis function loops through all records, and applies the filters to it. Filters are built-in or user-defined functions that return true when the record needs to be kept, and false when it needs to be discarded.\n\nIt is important to note that the records are not actually removed: they are masked from user view. This means that you can try different filtering strategies without having to re-query GBIF.\n\nThe optional filters argument is an array of functions, each of the functions must take a single GBIFRecord as an input, and return true or false.\n\n\n\n\n\n"
+    "text": "Filters a series of records\n\nThis function will take the filter function f and use it to mask the records that do not satisfy it. Note that if a record is already masked due to the application of a previous filter, its status will not be modified. The application of filters is therefore cumulative.\n\nNote that while the usual filter! function removes objects, this one will only mask them. The objects can be unmasked with allrecords!. This design choice was made because GBIFRecords track the position in the API pages, and it seemed safer to keep all information. Note that when calling length or iterating over a GBIFRecords object, only the unmasked records will be shown.\n\nIt is possible to apply multiple filters at once, using the following syntax:\n\nfilter!.([f1, f2, f3], records)\n\n\n\n\n\n"
 },
 
 {
-    "location": "qaqc/#Apply-filtering-to-the-data-1",
+    "location": "qaqc/#Apply-filters-to-the-data-1",
     "page": "Filtering records",
-    "title": "Apply filtering to the data",
+    "title": "Apply filters to the data",
     "category": "section",
-    "text": "qualitycontrol!"
+    "text": "filter!"
+},
+
+{
+    "location": "qaqc/#GBIF.allrecords!",
+    "page": "Filtering records",
+    "title": "GBIF.allrecords!",
+    "category": "function",
+    "text": "Show all occurrences\n\nThis function reverses the action of filter!. It will unmask all records that have been removed under the current filters.\n\n\n\n\n\n"
+},
+
+{
+    "location": "qaqc/#Removing-filters-1",
+    "page": "Filtering records",
+    "title": "Removing filters",
+    "category": "section",
+    "text": "allrecords!"
 },
 
 {
@@ -221,7 +237,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filtering records",
     "title": "GBIF.have_no_issues",
     "category": "function",
-    "text": "No known issues at all\n\nThis filter will retain no observation. At least not in theory, but it is very rare to have GBIF records with absolutely no issues. Its use is discouraged.\n\nBy design, it is the default argument for qualitycontrol! – it\'s your job to decide precisely which filters you need to use.\n\n\n\n\n\n"
+    "text": "No known issues at all\n\nThis filter will retain no observation. At least not in theory, but it is very rare to have GBIF records with absolutely no issues. Its use is discouraged.\n\n\n\n\n\n"
 },
 
 {
@@ -233,11 +249,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "qaqc/#List-of-filters-1",
+    "location": "qaqc/#GBIF.have_a_date",
     "page": "Filtering records",
-    "title": "List of filters",
+    "title": "GBIF.have_a_date",
+    "category": "function",
+    "text": "The date is not missing\n\nThis filter will remove observations with a missing date.\n\n\n\n\n\n"
+},
+
+{
+    "location": "qaqc/#List-of-built-in-filters-1",
+    "page": "Filtering records",
+    "title": "List of built-in filters",
     "category": "section",
-    "text": "have_both_coordinates\nhave_neither_zero_coordinates\nhave_no_zero_coordinates\nhave_no_issues\nhave_ok_coordinates"
+    "text": "have_both_coordinates\nhave_neither_zero_coordinates\nhave_no_zero_coordinates\nhave_no_issues\nhave_ok_coordinates\nhave_a_date"
 },
 
 {
@@ -246,22 +270,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Making your own filters",
     "category": "section",
     "text": "Filter functions are all sharing the same declaration: they accept a single GBIFRecord object as input, and return a boolean as output. Think of the filter as a question you ask about the occurrence object. Does it have no know issues? If this is true, then we keep this record. If not, we reject it."
-},
-
-{
-    "location": "qaqc/#GBIF.showall!",
-    "page": "Filtering records",
-    "title": "GBIF.showall!",
-    "category": "function",
-    "text": "Show all occurrences\n\nThis function reverses the action of qualitycontrol!. It will unmask all records that have been removed under the current filters.\n\n\n\n\n\n"
-},
-
-{
-    "location": "qaqc/#Removing-filters-1",
-    "page": "Filtering records",
-    "title": "Removing filters",
-    "category": "section",
-    "text": "showall!"
 },
 
 {
