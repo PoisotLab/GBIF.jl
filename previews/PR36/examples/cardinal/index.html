@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Northen cardinal · GBIF occurrences API wrapper in Julia</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">GBIF occurrences API wrapper in Julia</span></div><form class="docs-search" action="../../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="../../data/">Getting data</a></li><li><a class="tocitem" href="../../types/">Types</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li class="is-active"><a class="tocitem" href>Northen cardinal</a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Northen cardinal</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Northen cardinal</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/EcoJulia/GBIF.jl/blob/master/docs/src/examples/cardinal.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Mammals-in-Québec"><a class="docs-heading-anchor" href="#Mammals-in-Québec">Mammals in Québec</a><a id="Mammals-in-Québec-1"></a><a class="docs-heading-anchor-permalink" href="#Mammals-in-Québec" title="Permalink"></a></h1><p>In this example, we will look at the number of observations of the <em>Cardinalis cardinalis</em> observed in Québec in 2012 and 2013, sort the observations by date, and compare the number of observations over the two years. This will showcase the integration of the package with <code>Query.jl</code>.</p><pre><code class="language-julia">using GBIF
+using DataFrames
+using Query
+using StatsPlots
+using Dates</code></pre><pre><code class="language-none">[ Info: Loading DataFrames support for GBIF.jl
+┌ Warning: Package GBIF does not have DataFrames in its dependencies:
+│ - If you have GBIF checked out for development and have
+│   added DataFrames as a dependency but haven&#39;t updated your primary
+│   environment&#39;s manifest file, try `Pkg.resolve()`.
+│ - Otherwise you may need to report an issue with GBIF
+└ Loading DataFrames into GBIF from project dependency, future warnings for GBIF are suppressed.</code></pre><p>We can get the taxonomic object for <em>Cardinalis cardinalis</em>:</p><pre><code class="language-julia">sp_code = taxon(&quot;Odocoileus virginianus&quot;, rank = :SPECIES)</code></pre><pre><code class="language-none">GBIF taxon -- Odocoileus virginianus
+</code></pre><p>With this object created, we can define a rough bounding box for Québec, and start defining our query:</p><pre><code class="language-julia">lat, lon = (44.0, 62.0), (-80.0, -56.0)
+
+obs_qc = occurrences(
+    sp_code,
+    &quot;limit&quot; =&gt; 300,
+    &quot;hasCoordinate&quot; =&gt; &quot;true&quot;,
+    &quot;decimalLatitude&quot; =&gt; lat,
+    &quot;decimalLongitude&quot; =&gt; lon,
+    &quot;year&quot; =&gt; (2010, 2020)
+)</code></pre><pre><code class="language-none">GBIF records: downloaded 300 out of 3562
+</code></pre><p>Because the query parameters are going to remain within the <code>obs_qc</code> variable, all we need to do is call <code>occurrences!</code> on this variable until all occurrences (of which there are <code>size(obs_qc)</code>) are retrieved.</p><pre><code class="language-">while length(obs_qc) &lt; size(obs_qc)
+    occurrences!(obs_qc)
+end</code></pre><pre><code class="language-">d = obs_qc |&gt;
+  @filter(_.rank == &quot;SPECIES&quot;) |&gt;
+  @filter(_.country == &quot;Canada&quot;) |&gt;
+  @map({_.key, year=year(_.date), month=month(_.date)}) |&gt;
+  @groupby((_.year, _.month)) |&gt;
+  @map({year = first(unique(_.year)), month = first(unique(_.month)), obs = length(_)}) |&gt;
+  @orderby(_.month) |&gt;
+  @thenby(_.year) |&gt;
+  DataFrame
+
+theme(:default)
+@df d plot(:month, :obs, group=:year, palette=cgrad(:cividis, :year))</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../types/">« Types</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 8 July 2020 16:23">Wednesday 8 July 2020</span>. Using Julia version 1.4.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
