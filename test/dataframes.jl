@@ -7,8 +7,7 @@ using CSV
 
 oc = occurrences()
 
-# This is very slow to compile, we should fix type stability somewhat
-df = DataFrame(oc)
+@time df = DataFrame(oc)
 @test typeof(df) <: DataFrame
 
 CSV.write("test.csv", oc)

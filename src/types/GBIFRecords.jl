@@ -9,33 +9,33 @@ The `taxon` field is a `GBIFTaxon` object, and can therefore be manipulated as
 any other `GBIFTaxon`.
 """
 struct GBIFRecord
-    key::Int64
-    datasetKey::AbstractString
-    dataset::Union{Missing, AbstractString}
-    publishingOrgKey::Union{Missing, AbstractString}
-    publishingCountry::Union{Missing, AbstractString}
-    institutionCode::Union{Missing, AbstractString}
-    protocol::Union{Missing, AbstractString}
-    countryCode::Union{Missing, AbstractString}
-    country::Union{Missing, AbstractString}
+    key::Int
+    datasetKey::String
+    dataset::Union{Missing,String}
+    publishingOrgKey::Union{Missing,String}
+    publishingCountry::Union{Missing,String}
+    institutionCode::Union{Missing,String}
+    protocol::Union{Missing,String}
+    countryCode::Union{Missing,String}
+    country::Union{Missing,String}
     basisOfRecord::Symbol
-    individualCount::Union{Missing, Integer}
-    latitude::Union{Missing, AbstractFloat}
-    longitude::Union{Missing, AbstractFloat}
-    precision::Union{Missing, AbstractFloat}
-    uncertainty::Union{Missing, AbstractFloat}
-    geodetic::Union{Missing, AbstractString}
-    date::Union{Missing, DateTime}
-    identified::Union{Missing, DateTime}
+    individualCount::Union{Missing,Int}
+    latitude::Union{Missing,Float64}
+    longitude::Union{Missing,Float64}
+    precision::Union{Missing,Float64}
+    uncertainty::Union{Missing,Float64}
+    geodetic::Union{Missing,String}
+    date::Union{Missing,DateTime}
+    identified::Union{Missing,DateTime}
     issues::Vector{Symbol}
-    taxonKey::Union{Missing, Integer}
-    rank::Union{Missing, AbstractString}
-    generic::Union{Missing, AbstractString}
-    epithet::Union{Missing, AbstractString}
-    vernacular::Union{Missing, AbstractString}
-    scientific::Union{Missing, AbstractString}
-    observer::Union{Missing, AbstractString}
-    license::Union{Missing, AbstractString}
+    taxonKey::Union{Missing,Int}
+    rank::Union{Missing,String}
+    generic::Union{Missing,String}
+    epithet::Union{Missing,String}
+    vernacular::Union{Missing,String}
+    scientific::Union{Missing,String}
+    observer::Union{Missing,String}
+    license::Union{Missing,String}
     taxon::GBIFTaxon
 end
 
@@ -78,8 +78,8 @@ end
 """
 function GBIFRecord(o::Dict{String, Any})
     # Prepare the taxon object
-    levels = ["kingdom", "phylum", "class", "order", "family", "genus", "species"]
-    r = Dict{Any,Any}()
+    levels = ("kingdom", "phylum", "class", "order", "family", "genus", "species")
+    r = Dict{String,Union{Pair{String,Int},Missing}}()
     for l in levels
         if haskey(o, l)
             r[l] = Pair(o[l], o[l*"Key"])
