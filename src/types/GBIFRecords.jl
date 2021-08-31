@@ -30,14 +30,32 @@ struct GBIFRecord
     issues::Vector{Symbol}
     taxonKey::Union{Missing, Integer}
     rank::Union{Missing, AbstractString}
-    taxon::GBIFTaxon
     generic::Union{Missing, AbstractString}
     epithet::Union{Missing, AbstractString}
     vernacular::Union{Missing, AbstractString}
     scientific::Union{Missing, AbstractString}
     observer::Union{Missing, AbstractString}
     license::Union{Missing, AbstractString}
+    taxon::GBIFTaxon
 end
+
+# We add some taxon properties to the GBIFRecord properties.
+# These will flow through to the Tables.jl interface.
+const TAXON_PROPERTIES = (:kingdom, :phylum, :class, :order, :family, :genus, :species)
+
+# Skip the taxon property, use its fields instead
+Base.propertynames(::GBIFRecord) = (fieldnames(GBIFRecord)[1:end-1]..., TAXON_PROPERTIES...)
+
+function Base.getproperty(record::GBIFRecord, key::Symbol)
+    if key in TAXON_PROPERTIES
+        _format_gbif_entity(getfield(record.taxon, key))
+    else
+        getfield(record, key)
+    end
+end
+
+_format_gbif_entity(::Missing) = missing
+_format_gbif_entity(t::Pair{String,Int64}) = t.first
 
 """
 **Internal function to format dates in records**
@@ -119,13 +137,13 @@ function GBIFRecord(o::Dict{String, Any})
         Symbol.(o["issues"]),
         get(o, "taxonKey", missing),
         get(o, "taxonRank", missing),
-        this_record_taxon,
         get(o, "genericName", missing),
         get(o, "specificEpithet", missing),
         get(o, "vernacularName", missing),
         get(o, "scientificName", missing),
         get(o, "recordedBy", missing),
-        get(o, "license", missing)
+        get(o, "license", missing),
+        this_record_taxon,
     )
     return formatted_record
 end
@@ -145,3 +163,5 @@ mutable struct GBIFRecords
     query::Union{Vector{Pair}, Nothing}
     occurrences::Vector{GBIFRecord}
 end
+
+Base.parent(records::GBIFRecords) = records.occurrences
