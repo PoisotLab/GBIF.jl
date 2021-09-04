@@ -5,7 +5,7 @@ Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 
 [compat]
-DataFrames = "0.21"
-Documenter = "0.25"
-Query = "0.12"
+DataFrames = "1"
+Documenter = "0.27"
+Query = "1"
 StatsPlots = "0.14"
