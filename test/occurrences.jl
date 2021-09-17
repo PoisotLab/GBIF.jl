@@ -33,4 +33,11 @@ while length(obs) < size(obs)
 end
 @test length(obs) == size(obs)
 
+# `read!` all of the available records
+toread = occurrences("scientificName" => "Burramys parvus", "limit" => 300)
+@test length(toread) == 300
+read!(toread)
+@test length(obs) == size(obs)
+
+
 end

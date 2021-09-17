@@ -28,3 +28,11 @@ end
 function iterate(o::GBIFRecords, t::Union{Int64,Nothing})
     iterate(collect(view(o)), t)
 end
+
+function Base.read!(o::GBIFRecords)
+    # TODO: This is confusing synxtax, we should change it so length
+    # and size mean what they do in base Julia. 
+    while length(o) < size(o)
+        occurrences!(o)
+    end
+end
