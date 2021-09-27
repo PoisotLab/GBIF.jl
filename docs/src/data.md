@@ -10,10 +10,7 @@ taxon
 
 The most common task is to retrieve many occurrences according to a query. The
 core type of this package is `GBIFRecord`, which is a very lightweight type
-containing information about the query, and a list of `GBIFRecord` for every
-matching occurrence. Note that the GBIF "search" API is limited to 100000
-results, and will not return more than this amount.
-
+containing information about the query, and a list of `GBIFRecord` for every matching occurrence. Note that the GBIF "search" API is limited to 100000 results, and will not return more than this amount.
 ### Single occurrence
 
 ```@docs
@@ -83,3 +80,64 @@ using GBIF
 can_most_recent = occurrences("hasCoordinate" => true, "country" => "CA")
 occurrences!(can_most_recent)
 ```
+
+
+## Tables.jl interface
+
+GBIF.jl defines a [Tables.jl](https://github.com/JuliaData/Tables.jl) interface.
+
+This means [`GBIFRecords`](@ref) objects can be treated as a table, 
+and e.g. saved to CSV without using an intermediate dataframe.
+
+```@example tables
+using GBIF, CSV
+oc = occurrences()
+CSV.write("test.csv", oc)
+```
+
+`GBIFRecords` can also be converted to a `DataFrame` or other Tables.jl compatable object:
+
+```@example tables
+using DataFrames
+df = DataFrame(oc)
+```
+
+The available columns are:
+
+| Column Name         | Type                             |
+| :------------------ | :------------------------------- |
+| `key`               | `Int64`                          |
+| `datasetKey`        | `AbstractString`                 |
+| `dataset`           | `Union{Missing, AbstractString}` |
+| `publishingOrgKey`  | `Union{Missing, AbstractString}` |
+| `publishingCountry` | `Union{Missing, AbstractString}` |
+| `institutionCode`   | `Union{Missing, AbstractString}` |
+| `protocol`          | `Union{Missing, AbstractString}` |
+| `countryCode`       | `Union{Missing, AbstractString}` |
+| `country`           | `Union{Missing, AbstractString}` |
+| `basisOfRecord`     | `Symbol`                         |
+| `individualCount`   | `Union{Missing, Integer}`        |
+| `latitude`          | `Union{Missing, AbstractFloat}`  |
+| `longitude`         | `Union{Missing, AbstractFloat}`  |
+| `precision`         | `Union{Missing, AbstractFloat}`  |
+| `uncertainty`       | `Union{Missing, AbstractFloat}`  |
+| `geodetic`          | `Union{Missing, AbstractString}` |
+| `date`              | `Union{Missing, DateTime}`       |
+| `identified`        | `Union{Missing, DateTime}`       |
+| `issues`            | `Vector{Symbol}`                 |
+| `taxonKey`          | `Union{Missing, Integer}`        |
+| `rank`              | `Union{Missing, AbstractString}` |
+| `generic`           | `Union{Missing, AbstractString}  |
+| `epithet`           | `Union{Missing, AbstractString}` |
+| `vernacular`        | `Union{Missing, AbstractString}` |
+| `scientific`        | `Union{Missing, AbstractString}` |
+| `observer`          | `Union{Missing, AbstractString}` |
+| `license`           | `Union{Missing, AbstractString}` |
+| `kingdom`           | `String`                         |
+| `phylum`            | `String`                         |
+| `class`             | `String`                         |
+| `order`             | `String`                         |
+| `family`            | `String`                         |
+| `genus`             | `Union{Missing, String}`         | 
+| `species`           | `Union{Missing, String}`         |
+
