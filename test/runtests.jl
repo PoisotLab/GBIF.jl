@@ -10,7 +10,7 @@ tests = [
   "paging" => "paging.jl",
   "iteration" => "iteration.jl",
   "methods" => "methods.jl",
-  "data frame support" => "dataframes.jl",
+  "tables support" => "tables.jl",
   "query support" => "query.jl"
 ]
 
