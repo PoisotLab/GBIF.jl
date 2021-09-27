@@ -1,4 +1,4 @@
-module TestDataFrames
+module TestTables
 
 using GBIF
 using DataFrames
@@ -15,6 +15,5 @@ CSV.write("test.csv", oc)
 @test isfile("test.csv")
 CSV.read("test.csv", DataFrame)
 rm("test.csv")
-
 
 end
