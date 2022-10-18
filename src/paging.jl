@@ -1,21 +1,21 @@
 function _internal_offset_update!(o::GBIFRecords)
-  offset = length(o)
-  offset_index = findfirst((p) -> string(p.first) == "offset", o.query)
-  if isnothing(offset_index)
-    push!(o.query, "offset" => offset)
-  else
-    deleteat!(o.query, offset_index)
-    push!(o.query, "offset" => offset)
-  end
+    offset = length(o)
+    offset_index = findfirst((p) -> string(p.first) == "offset", o.query)
+    if isnothing(offset_index)
+        push!(o.query, "offset" => offset)
+    else
+        deleteat!(o.query, offset_index)
+        push!(o.query, "offset" => offset)
+    end
 end
 
 function _internal_limit_update!(o::GBIFRecords)
-  limit_index = findfirst((p) -> string(p.first) == "limit", o.query)
-  limit = isnothing(limit_index) ? 20 : o.query[limit_index].second
-  if (length(o) + limit) > size(o)
-    isnothing(limit_index) || deleteat!(o.query, limit_index)
-    push!(o.query, "limit" => size(o) - length(o))
-  end
+    limit_index = findfirst((p) -> string(p.first) == "limit", o.query)
+    limit = isnothing(limit_index) ? 20 : o.query[limit_index].second
+    if (length(o) + limit) > size(o)
+        isnothing(limit_index) || deleteat!(o.query, limit_index)
+        push!(o.query, "limit" => size(o) - length(o))
+    end
 end
 
 """
@@ -31,19 +31,19 @@ ensure that the previous and the new occurrences have the same status, but only
 for records that have already been retrieved.
 """
 function occurrences!(o::GBIFRecords)
-  if length(o) == size(o)
-    @info "All occurences for this query have been returned"
-  else
-    if isnothing(o.query)
-      o.query = Dict{String,Any}()
+    if length(o) == size(o)
+        @info "All occurences for this query have been returned"
+    else
+        if isnothing(o.query)
+            o.query = Dict{String, Any}()
+        end
+        _internal_offset_update!(o)
+        _internal_limit_update!(o)
+        offset = length(o)
+        # Retrieve and add
+        retrieved, _, of_max = _internal_occurrences_getter(o.query...)
+        start = length(o) + 1
+        stop = start + length(retrieved) - 1
+        o.occurrences[start:stop] = retrieved
     end
-    _internal_offset_update!(o)
-    _internal_limit_update!(o)
-    offset = length(o)
-    # Retrieve and add
-    retrieved, _, of_max = _internal_occurrences_getter(o.query...)
-    start = length(o)+1
-    stop = start + length(retrieved) - 1
-    o.occurrences[start:stop] = retrieved
-  end
 end

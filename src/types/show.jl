@@ -1,6 +1,6 @@
 import Base.show
 
-_strfmt(str::T) where {T}  = str
+_strfmt(str::T) where {T} = str
 _strfmt(::Nothing) = "<nothing>"
 
 """
@@ -11,7 +11,10 @@ _strfmt(::Nothing) = "<nothing>"
 Displays the key, the taxon name, and the country of observation.
 """
 function show(io::IO, o::GBIFRecord)
-  println(io, "GBIF record $(_strfmt(o.key))\t$(_strfmt(o.taxon.name))\t($(_strfmt(o.country)))")
+    return println(
+        io,
+        "GBIF record $(_strfmt(o.key))\t$(_strfmt(o.taxon.name))\t($(_strfmt(o.country)))",
+    )
 end
 
 """
@@ -22,7 +25,7 @@ end
 Displays the total number, and the number of currently unmasked records.
 """
 function show(io::IO, o::GBIFRecords)
-  println(io, "GBIF records: downloaded $(length(o)) out of $(size(o))")
+    return println(io, "GBIF records: downloaded $(length(o)) out of $(size(o))")
 end
 
 """
@@ -33,5 +36,5 @@ end
 Displays the taxon name.
 """
 function show(io::IO, t::GBIFTaxon)
-  println(io, "GBIF taxon -- $(_strfmt(t.name))")
+    return println(io, "GBIF taxon -- $(_strfmt(t.name))")
 end

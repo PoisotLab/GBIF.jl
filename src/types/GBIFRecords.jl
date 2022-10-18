@@ -61,10 +61,10 @@ end
 function GBIFRecord(o::Dict{String, Any})
     # Prepare the taxon object
     levels = ["kingdom", "phylum", "class", "order", "family", "genus", "species"]
-    r = Dict{Any,Any}()
+    r = Dict{Any, Any}()
     for l in levels
         if haskey(o, l)
-            r[l] = Pair(o[l], o[l*"Key"])
+            r[l] = Pair(o[l], o[l * "Key"])
         else
             r[l] = missing
         end
@@ -75,7 +75,7 @@ function GBIFRecord(o::Dict{String, Any})
     if !ismissing(get(o, "genericName", missing))
         this_name = o["genericName"]
         if !ismissing(get(o, "specificEpithet", missing))
-            this_name *= " "*get(o, "specificEpithet", missing)
+            this_name *= " " * get(o, "specificEpithet", missing)
         end
     else
         this_name = o["scientificName"]
@@ -94,10 +94,10 @@ function GBIFRecord(o::Dict{String, Any})
         r["genus"],
         r["species"],
         100,
-        false
+        false,
     )
 
-    formatted_record =  GBIFRecord(
+    formatted_record = GBIFRecord(
         o["key"],
         o["datasetKey"],
         get(o, "datasetName", missing),
@@ -125,7 +125,7 @@ function GBIFRecord(o::Dict{String, Any})
         get(o, "vernacularName", missing),
         get(o, "scientificName", missing),
         get(o, "recordedBy", missing),
-        get(o, "license", missing)
+        get(o, "license", missing),
     )
     return formatted_record
 end
