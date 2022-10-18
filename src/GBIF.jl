@@ -89,6 +89,9 @@ const gbifenums = Dict(
 
 include("query.jl")
 
+include("exceptions.jl")
+export GBIFException, NoTaxonMatchedAtRank, OtherTaxonMatchingException, BadHTMLResponseCode
+
 include("types/GBIFTaxon.jl")
 export GBIFTaxon
 
