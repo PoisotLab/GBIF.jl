@@ -1,6 +1,6 @@
 # GBIF wrapper for Julia
 
-***MAINTENANCE MODE*** - this repo is being move to a monorepo with better integration between features
+***MAINTENANCE MODE*** - this repo is being moved to https://github.com/PoisotLab/SpeciesDistributionToolkit.jl
 
 This is project offers an interface to the [GBIF] search API from
 Julia. Current efforts focus on querying and exporting occurrences through the
