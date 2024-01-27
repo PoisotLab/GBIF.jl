@@ -31,44 +31,44 @@ of the taxon/level to its unique key in the GBIF database.
 `synonym` - a `Boolean` indicating whether the taxon is a synonym
 """
 struct GBIFTaxon
-   name::AbstractString
-   scientific::AbstractString
-   status::Union{Missing, Symbol}
-   match::Union{Missing, Symbol}
-   kingdom::Union{Missing, Pair{String, Int64}}
-   phylum::Union{Missing, Pair{String, Int64}}
-   class::Union{Missing, Pair{String, Int64}}
-   order::Union{Missing, Pair{String, Int64}}
-   family::Union{Missing, Pair{String, Int64}}
-   genus::Union{Missing, Pair{String, Int64}}
-   species::Union{Missing, Pair{String, Int64}}
-   confidence::Union{Missing, Int64}
-   synonym::Bool
+    name::AbstractString
+    scientific::AbstractString
+    status::Union{Missing, Symbol}
+    match::Union{Missing, Symbol}
+    kingdom::Union{Missing, Pair{String, Int64}}
+    phylum::Union{Missing, Pair{String, Int64}}
+    class::Union{Missing, Pair{String, Int64}}
+    order::Union{Missing, Pair{String, Int64}}
+    family::Union{Missing, Pair{String, Int64}}
+    genus::Union{Missing, Pair{String, Int64}}
+    species::Union{Missing, Pair{String, Int64}}
+    confidence::Union{Missing, Int64}
+    synonym::Bool
 end
 
 function GBIFTaxon(o::Dict{String, Any})
-   levels = ["kingdom", "phylum", "class", "order", "family", "genus", "species"]
-   r = Dict{Any,Any}()
-   for l in levels
-      if haskey(o, l)
-         r[l] = Pair(o[l], o[l*"Key"])
-      else
-         r[l] = missing
-      end
-   end
-   return GBIFTaxon(
-      o["canonicalName"],
-      o["scientificName"],
-      haskey(o, "status") ? Symbol(o["status"]) : missing,
-      haskey(o, "matchType") ? Symbol(o["matchType"]) : missing,
-      r["kingdom"],
-      r["phylum"],
-      r["class"],
-      r["order"],
-      r["family"],
-      r["genus"],
-      r["species"],
-      get(o, "confidence", missing),
-      o["synonym"]
-   )
+    levels = ["kingdom", "phylum", "class", "order", "family", "genus", "species"]
+    r = Dict{Any, Any}()
+    for l in levels
+        if haskey(o, l)
+            r[l] = Pair(o[l], o[l * "Key"])
+        else
+            r[l] = missing
+        end
+    end
+    return GBIFTaxon(
+        o["canonicalName"],
+        o["scientificName"],
+        haskey(o, "status") ? Symbol(o["status"]) : missing,
+        haskey(o, "matchType") ? Symbol(o["matchType"]) : missing,
+        r["kingdom"],
+        r["phylum"],
+        r["class"],
+        r["order"],
+        r["family"],
+        r["genus"],
+        r["species"],
+        get(o, "confidence", missing),
+        o["synonym"],
+    )
 end
